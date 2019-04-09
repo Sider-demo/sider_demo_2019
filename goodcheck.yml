@@ -111,4 +111,15 @@ rules:
       Ref. https://www.owasp.org/index.php/PHP_Configuration_Cheat_Sheet
     glob:
       - "**/php.ini"
+  - id: sider.sample.java
+    pattern: 
+      regexp: new SimpleDateFormat\(.*\)
+    message: |
+      SimpleDateFormat#setLenient(false); で日付の厳密性を担保しましょう。
+
+      Java8からならDateTimeFormatterを使いましょう。
+      SimpleDateFormatを使う場合は、"2014/02/29" のような存在しない値を受け取ったり
+      してもエラーになりません。
+    glob:
+      - "**/*.java"
 
